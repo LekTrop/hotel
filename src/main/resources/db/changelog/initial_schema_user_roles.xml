@@ -1,0 +1,77 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet author="zhytariuk" id="initial_schema_user_roles.1">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="user_roles"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="user_roles">
+            <column name="fk_username" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="fk_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- add role foreign key constraint -->
+    <changeSet author="zhytariuk" id="initial_schema_user_roles.2">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="fk_user_roles_role_name"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="fk_name"
+                                 baseTableName="user_roles"
+                                 constraintName="fk_user_roles_role_name"
+                                 referencedColumnNames="name"
+                                 referencedTableName="roles"/>
+    </changeSet>
+
+    <!-- add user foreign key constraint -->
+    <changeSet author="zhytariuk" id="initial_schema_user_roles.3">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="fk_user_roles_username"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="fk_username"
+                                 baseTableName="user_roles"
+                                 constraintName="fk_user_roles_username"
+                                 referencedColumnNames="username"
+                                 referencedTableName="users"/>
+    </changeSet>
+
+    <changeSet author="zhytariuk" id="initial_schema_user_roles.4">
+        <preConditions onFail="WARN">
+            <not>
+                <sqlCheck expectedResult="0">
+                    SELECT count(*) FROM user_roles where fk_username = 'admin' AND fk_name = 'ADMIN_ROLE';
+                </sqlCheck>
+            </not>
+        </preConditions>
+        <sql>
+            INSERT INTO user_roles(fk_username,fk_name) VALUES ('admin', 'ADMIN_ROLE');
+        </sql>
+    </changeSet>
+
+    <changeSet author="zhytariuk" id="initial_schema_user_roles.5">
+        <preConditions onFail="WARN">
+            <not>
+                <sqlCheck expectedResult="0">
+                    SELECT count(*) FROM user_roles where fk_username = 'user' and fk_name = 'USER_ROLE';
+                </sqlCheck>
+            </not>
+        </preConditions>
+        <sql>
+            INSERT INTO user_roles(fk_username, fk_name) VALUES ('user', 'USER_ROLE');
+        </sql>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,51 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet author="zhytariuk" id="initial_schema_room_discounts.1">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="room_discounts"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="room_discounts">
+            <column name="fk_room_id" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="fk_discount_id" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- add room foreign key constraint -->
+    <changeSet author="zhytariuk" id="initial_schema_user_roles.2">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="fk_room_discounts_room_id"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="fk_room_id"
+                                 baseTableName="room_discounts"
+                                 constraintName="fk_room_discounts_room_id"
+                                 referencedColumnNames="room_id"
+                                 referencedTableName="rooms"/>
+    </changeSet>
+
+    <!-- add discount foreign key constraint -->
+    <changeSet author="zhytariuk" id="initial_schema_room_discount.3">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="fk_room_discounts_discount_id"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="fk_discount_id"
+                                 baseTableName="room_discounts"
+                                 constraintName="fk_room_discounts_discount_id"
+                                 referencedColumnNames="discount_id"
+                                 referencedTableName="discounts"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,32 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="zhytariuk" id="initial_schema_role.1">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="roles"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="roles">
+            <column name="name" type="VARCHAR(255)">
+                <constraints primaryKey="true" primaryKeyName="role_pk"/>
+            </column>
+
+            <column name="description" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="zhytariuk" id="initial_schema_role.2">
+        <sql>
+            INSERT INTO roles(name, description) VALUES ('ADMIN_ROLE', 'The admin role in API');
+        </sql>
+    </changeSet>
+
+    <changeSet author="zhytariuk" id="initial_schema_role.3">
+        <sql>
+            INSERT INTO roles(name, description) VALUES ('USER_ROLE', 'The user role in API');
+        </sql>
+    </changeSet>
+</databaseChangeLog>

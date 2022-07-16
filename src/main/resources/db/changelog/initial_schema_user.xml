@@ -1,0 +1,89 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="zhytariuk" id="initial_schema_user.1">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="users"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="users">
+            <column name="username" type="VARCHAR(255)">
+                <constraints primaryKey="true" primaryKeyName="user_pk"/>
+            </column>
+
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
+            <column name="creation_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="telephone" type="VARCHAR(255)">
+                <constraints unique="true"/>
+            </column>
+
+            <column name="is_enabled" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="is_account_non_locked" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="is_account_non_expired" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="is_credentials_non_expired" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="date_of_birth" type="TIMESTAMP WITHOUT TIME ZONE"/>
+
+        </createTable>
+
+    </changeSet>
+
+    <changeSet author="zhytariuk" id="initial_schema_user.2">
+        <preConditions onFail="WARN">
+            <not>
+                <sqlCheck expectedResult="0">
+                    SELECT count(*) FROM users where username = 'admin'
+                </sqlCheck>
+            </not>
+        </preConditions>
+        <sql>
+            INSERT INTO
+            users(username,password,email,creation_date,telephone,date_of_birth,is_enabled,is_account_non_locked,
+            is_account_non_expired,is_credentials_non_expired)
+            VALUES('admin','$2a$12$l7/2qD6rzxcishpwMcuxbuLRfALkgt6jAXze7jEPNvfkthNziGdg6','iwantroof@gmail.com',
+            '05/27/2022','+380993313066','07/04/2002',true,true,true,true);
+        </sql>
+    </changeSet>
+
+    <changeSet author="zhytariuk" id="initial_schema_user.3">
+        <preConditions onFail="WARN">
+            <not>
+                <sqlCheck expectedResult="0">
+                    SELECT count(*) FROM users where username = 'user'
+                </sqlCheck>
+            </not>
+        </preConditions>
+
+        <sql>
+            INSERT INTO
+            users(username,password,email,creation_date,telephone,date_of_birth,is_enabled,is_account_non_locked,
+            is_account_non_expired,is_credentials_non_expired)
+            VALUES('user','$2a$12$g.Mu.aR71Rwq4qsNuBAjU.Rzqsxb/JQw8hqf.bUGuR.Ict.tZv7cm','iroofee@gmail.com',
+            '05/27/2022','+380664507202','07/04/2002',true,true,true,true);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

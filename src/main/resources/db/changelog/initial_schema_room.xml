@@ -1,0 +1,42 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="zhytariuk" id="initial_schema_room.1">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="rooms"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="rooms">
+            <column name="room_id" type="VARCHAR(255)">
+                <constraints primaryKey="true" primaryKeyName="room_pk"/>
+            </column>
+
+            <column name="number" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="price" type="DECIMAL">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="description" type="VARCHAR(500)"/>
+            <column name="fk_hotel_id" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="zhytariuk" id="initial_schema_room.2">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="fk_room_hotel_id"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="fk_hotel_id"
+                                 baseTableName="rooms"
+                                 constraintName="fk_room_hotel_id"
+                                 referencedColumnNames="hotel_id"
+                                 referencedTableName="hotels"/>
+    </changeSet>
+</databaseChangeLog>

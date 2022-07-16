@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <include file="changelog/initial_schema_discount.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/initial_schema_hotel.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/initial_schema_role.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/initial_schema_user.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/initial_schema_room.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/initial_schema_user_roles.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/initial_schema_room_discounts.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/initial_schema_reservation.xml" relativeToChangelogFile="true"/>
+
+</databaseChangeLog>
