@@ -1,0 +1,9 @@
+.navigation {
+	height: 70px;
+	background: #262626;
+}
+
+.nav-container {
+	max-width: 1000px;
+	margin: 0 auto;
+}

@@ -6,6 +6,7 @@
 
     <include file="changelog/initial_schema_discount.xml" relativeToChangelogFile="true"/>
     <include file="changelog/initial_schema_hotel.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/initial_schema_images.xml" relativeToChangelogFile="true"/>
     <include file="changelog/initial_schema_role.xml" relativeToChangelogFile="true"/>
     <include file="changelog/initial_schema_user.xml" relativeToChangelogFile="true"/>
     <include file="changelog/initial_schema_room.xml" relativeToChangelogFile="true"/>

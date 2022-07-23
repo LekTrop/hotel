@@ -6,19 +6,22 @@ import java.util.Optional;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import ua.zhytariuk.nure.booking.exception.BookingNotFoundException;
 import ua.zhytariuk.nure.booking.model.api.authentication.UserApi;
 import ua.zhytariuk.nure.booking.model.domain.authentication.User;
 import ua.zhytariuk.nure.booking.model.mapper.UserMapper;
 import ua.zhytariuk.nure.booking.service.UserService;
+import ua.zhytariuk.nure.booking.service.facade.AuthenticationFacade;
 
 /**
  * TODO: Change class description
@@ -26,8 +29,8 @@ import ua.zhytariuk.nure.booking.service.UserService;
  * @author oleksandr.zhytariuk (ozhytari)
  * @since 0.1
  */
-@RestController
-@RequestMapping("api/v1/users")
+@Controller
+@RequestMapping("booking/users")
 @RequiredArgsConstructor
 public class UserEndpoint {
 
@@ -35,6 +38,8 @@ public class UserEndpoint {
     private final UserService userService;
     @NonNull
     private final UserMapper userMapper;
+    @NonNull
+    private final AuthenticationFacade authenticationFacade;
 
     @GetMapping("/{username}")
     public UserApi findByUsername(final @PathVariable("username") String username) {
@@ -43,14 +48,33 @@ public class UserEndpoint {
                        .orElseThrow(() -> new BookingNotFoundException(ENTITY_NOT_FOUND_EXCEPTION, username));
     }
 
-    @PostMapping
-    public UserApi save(final @RequestBody UserApi userApi) {
+    @GetMapping("/registration")
+    public String getRegistrationPage(final Model model) {
+        model.addAttribute("userForm", new UserApi());
+
+        return "registration";
+    }
+
+    @PostMapping("/registration")
+    public String save(final @ModelAttribute("userForm") UserApi userApi) {
         final User user = userMapper.toDomain(userApi);
         final var roles = userApi.getRoles();
 
         final User savedUser = userService.save(user, roles);
 
-        return userMapper.toApi(savedUser);
+        return "redirect:/booking/users/profile";
+    }
+
+    @GetMapping("/login")
+    public String getLoginPage(final Model model) {
+        return "login";
+    }
+
+    @GetMapping("/profile")
+    public String getProfilePage(final Model model) {
+        final UserApi user = findByUsername(authenticationFacade.getAuthentication().getName());
+        model.addAttribute("user", user);
+        return "profile";
     }
 
     @PutMapping("/{username}")

@@ -1,5 +1,6 @@
 package ua.zhytariuk.nure.booking.service.validation.user;
 
+import static ua.zhytariuk.nure.booking.exception.register.ErrorRegister.AGE_IS_LESS_THAT_MINIMUM;
 import static ua.zhytariuk.nure.booking.exception.register.ErrorRegister.REQUIRED_FIELD_DOES_NOT_EXIST;
 import static ua.zhytariuk.nure.booking.exception.register.ErrorRegister.ROLE_WITH_NAME_DOES_NOT_EXIST;
 import static ua.zhytariuk.nure.booking.exception.register.ErrorRegister.USER_CANNOT_BE_NULL;
@@ -9,12 +10,9 @@ import static ua.zhytariuk.nure.booking.exception.register.ErrorRegister.USER_WI
 import static ua.zhytariuk.nure.booking.exception.register.ErrorRegister.USER_WITH_USERNAME_ALREADY_EXIST;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
@@ -41,6 +39,7 @@ public class UserCreatedValidator extends AbstractUserValidator {
     private static final String TELEPHONE_FIELD = "telephone";
     private static final String EMAIL_FIELD = "email";
     private static final String USERNAME_FIELD = "username";
+    private static final String AGE_FIELD = "age";
 
     private final UserService userService;
     private final RoleService roleService;
@@ -50,6 +49,8 @@ public class UserCreatedValidator extends AbstractUserValidator {
     private int MINIMUM_PASSWORD_LENGTH;
     @Value("${validator.user.password.length}")
     private int MINIMUM_USERNAME_LENGTH;
+    @Value("${validator.user.age.number}")
+    private int MINIMUM_AGE;
 
     public UserCreatedValidator(final @NonNull @Lazy UserService userService,
                                 final @NonNull @Lazy RoleService roleService) {
@@ -68,16 +69,16 @@ public class UserCreatedValidator extends AbstractUserValidator {
             throw new BookingBadRequestException(USER_CANNOT_BE_NULL);
         }
 
-        isPasswordValid(user.getPassword());
-        isTelephoneValid(user.getTelephone());
-        isUsernameValid(user.getUsername());
-        isEmailValid(user.getEmail());
+        validatePassword(user.getPassword());
+        validateTelephone(user.getTelephone());
+        validateUsername(user.getUsername());
+        validateEmail(user.getEmail());
         validateRole(roles);
 
         return true;
     }
 
-    private void isPasswordValid(final String updatedPassword) {
+    private void validatePassword(final String updatedPassword) {
         if (StringUtils.isBlank(updatedPassword)) {
             throw new BookingBadRequestException(REQUIRED_FIELD_DOES_NOT_EXIST, PASSWORD_FIELD);
         }
@@ -87,7 +88,7 @@ public class UserCreatedValidator extends AbstractUserValidator {
         }
     }
 
-    private void isUsernameValid(final String username) {
+    private void validateUsername(final String username) {
         if (StringUtils.isBlank(username)) {
             throw new BookingBadRequestException(REQUIRED_FIELD_DOES_NOT_EXIST, USERNAME_FIELD);
         }
@@ -103,13 +104,13 @@ public class UserCreatedValidator extends AbstractUserValidator {
         }
     }
 
-    private void isTelephoneValid(final String updateTelephone) {
+    private void validateTelephone(final String updateTelephone) {
         if (StringUtils.isBlank(updateTelephone)) {
             throw new BookingBadRequestException(REQUIRED_FIELD_DOES_NOT_EXIST, TELEPHONE_FIELD);
         }
     }
 
-    private void isEmailValid(final String email) {
+    private void validateEmail(final String email) {
         if (StringUtils.isBlank(email)) {
             throw new BookingBadRequestException(REQUIRED_FIELD_DOES_NOT_EXIST, EMAIL_FIELD);
         }

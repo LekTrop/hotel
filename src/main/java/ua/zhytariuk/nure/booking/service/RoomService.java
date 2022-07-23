@@ -54,13 +54,17 @@ public class RoomService {
                                        final String checkIn,
                                        final String checkOut,
                                        final BigDecimal minPrice,
-                                       final BigDecimal maxPrice) {
+                                       final BigDecimal maxPrice,
+                                       final Integer adult,
+                                       final Integer child) {
 
         return roomRepository.getByFilter(hotelId,
                                           timeUtility.convertStringToTime(checkIn),
                                           timeUtility.convertStringToTime(checkOut),
                                           minPrice,
-                                          maxPrice)
+                                          maxPrice,
+                                          adult,
+                                          child)
                              .stream()
                              .map(roomUtility::recalculatePriceByDiscount)
                              .collect(Collectors.toList());

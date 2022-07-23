@@ -41,12 +41,13 @@ import lombok.ToString;
 @NamedNativeQueries(
         @NamedNativeQuery(
                 name = SELECT_ROOMS_BY_FILTER,
-                query = "SELECT * FROM rooms " +
-                        "left join hotels ON hotel_id = fk_hotel_id " +
-                        "left join reservations ON fk_room_id = room_id " +
-                        "WHERE :hotelId IS NOT NULL OR hotel_id = :hotelId " +
-                        "AND NOT (check_in_date < :checkIn AND check_out_date > :checkIn) " +
-                        "AND NOT (check_in_date > :checkIn AND check_in_date < :checkOut)",
+                query = "SELECT * FROM rooms left join hotels ON hotel_id = fk_hotel_id " +
+                        "full outer join reservations ON fk_room_id = room_id " +
+                        "WHERE (hotel_id = :hotelId) " +
+                        "AND ((:minPrice IS NULL OR price> :minPrice) AND (:maxPrice IS NULL OR price < :maxPrice)) " +
+                        "AND (max_adult >= :adult AND max_child >= :child) " +
+                        "AND check_in_date IS NULL OR NOT (check_in_date <= :checkIn AND check_out_date >= :checkIn) " +
+                        "AND check_in_date IS NULL OR NOT (check_in_date >= :checkIn AND check_in_date <= :checkOut) ",
                 resultClass = Room.class,
                 hints = @QueryHint(
                         name = org.hibernate.annotations.QueryHints.READ_ONLY,
@@ -70,8 +71,20 @@ public class Room {
     @Column(name = "room_id")
     private String id;
 
+    @Column(name = "type")
+    private String type;
+
+    @Column(name = "area")
+    private Integer area;
+
     @Column(name = "number", nullable = false)
     private Integer number;
+
+    @Column(name = "max_adult")
+    private Integer maxAdult;
+
+    @Column(name = "max_child")
+    private Integer maxChild;
 
     @Column(name = "price", nullable = false)
     private BigDecimal price;
@@ -91,10 +104,15 @@ public class Room {
             inverseJoinColumns = @JoinColumn(name = "fk_discount_id"))
     private Set<Discount> discounts = new HashSet<>();
 
-    @OneToMany
+    @OneToMany(mappedBy = "room")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private List<Reservation> reservations = new ArrayList<>();
+
+    @OneToMany(orphanRemoval = true,
+            cascade = CascadeType.ALL,
+            mappedBy = "room")
+    private List<Image> images = new ArrayList<>();
 
     @PrePersist
     private void prePersist() {

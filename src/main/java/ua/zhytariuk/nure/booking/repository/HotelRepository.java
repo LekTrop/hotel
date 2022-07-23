@@ -26,8 +26,10 @@ public class HotelRepository extends AbstractCrudRepository<Hotel, String> {
     }
 
     @Transactional(readOnly = true)
-    public List<Hotel> getAll() {
+    public List<Hotel> getAll(final String name) {
         return getEntityManager().createNamedQuery(SELECT_HOTELS, Hotel.class)
+                                 .setParameter("searchKeyword", "%" + name + "%")
+                                 .setParameter("name", name)
                                  .getResultList();
     }
 }

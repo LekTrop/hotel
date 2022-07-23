@@ -18,14 +18,20 @@ public interface UserMapper {
     @Mapping(target = "roles", qualifiedByName = "getRoleNames")
     UserApi toApi(final User user);
 
-    @Mapping(target = "reservations", ignore = true)
     @Mapping(target = "isEnabled", ignore = true)
     @Mapping(target = "isAccountNonLocked", ignore = true)
     @Mapping(target = "isAccountNonExpired", ignore = true)
     @Mapping(target = "isCredentialsNonExpired", ignore = true)
     @Mapping(target = "creationDate", ignore = true)
-    @Mapping(target = "roles", ignore = true)
+    @Mapping(target = "roles", qualifiedByName = "createRoleByName")
     User toDomain(final UserApi userApi);
+
+    @Named("createRoleByName")
+    default Set<Role> createRoleByName(final Set<String> roles) {
+        return roles.stream()
+                    .map(role -> Role.builder().name(role).build())
+                    .collect(Collectors.toSet());
+    }
 
     @Named("getRoleNames")
     default Set<String> getRoleNames(final Set<Role> roles) {

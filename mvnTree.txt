@@ -1,0 +1,56 @@
+[INFO] Scanning for projects...
+Downloading from artifactory: http://lwpeartifabld.tideworks.com:8080/artifactory/repo/org/codehaus/mojo/build-helper-maven-plugin/3.2.0/build-helper-maven-plugin-3.2.0.pom
+[WARNING] Failed to retrieve plugin descriptor for org.codehaus.mojo:build-helper-maven-plugin:3.2.0: Plugin org.codehaus.mojo:build-helper-maven-plugin:3.2.0 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.codehaus.mojo:build-helper-maven-plugin:jar:3.2.0
+Downloading from artifactory: http://lwpeartifabld.tideworks.com:8080/artifactory/repo/org/flywaydb/flyway-maven-plugin/8.0.5/flyway-maven-plugin-8.0.5.pom
+[WARNING] Failed to retrieve plugin descriptor for org.flywaydb:flyway-maven-plugin:8.0.5: Plugin org.flywaydb:flyway-maven-plugin:8.0.5 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.flywaydb:flyway-maven-plugin:jar:8.0.5
+Downloading from artifactory: http://lwpeartifabld.tideworks.com:8080/artifactory/repo/pl/project13/maven/git-commit-id-plugin/4.9.10/git-commit-id-plugin-4.9.10.pom
+[WARNING] Failed to retrieve plugin descriptor for pl.project13.maven:git-commit-id-plugin:4.9.10: Plugin pl.project13.maven:git-commit-id-plugin:4.9.10 or one of its dependencies could not be resolved: Failed to read artifact descriptor for pl.project13.maven:git-commit-id-plugin:jar:4.9.10
+Downloading from artifactory: http://lwpeartifabld.tideworks.com:8080/artifactory/repo/org/apache/johnzon/johnzon-maven-plugin/1.2.16/johnzon-maven-plugin-1.2.16.pom
+[WARNING] Failed to retrieve plugin descriptor for org.apache.johnzon:johnzon-maven-plugin:1.2.16: Plugin org.apache.johnzon:johnzon-maven-plugin:1.2.16 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.apache.johnzon:johnzon-maven-plugin:jar:1.2.16
+Downloading from artifactory: http://lwpeartifabld.tideworks.com:8080/artifactory/repo/org/jooq/jooq-codegen-maven/3.14.15/jooq-codegen-maven-3.14.15.pom
+[WARNING] Failed to retrieve plugin descriptor for org.jooq:jooq-codegen-maven:3.14.15: Plugin org.jooq:jooq-codegen-maven:3.14.15 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.jooq:jooq-codegen-maven:jar:3.14.15
+Downloading from artifactory: http://lwpeartifabld.tideworks.com:8080/artifactory/repo/org/jetbrains/kotlin/kotlin-maven-plugin/1.6.21/kotlin-maven-plugin-1.6.21.pom
+[WARNING] Failed to retrieve plugin descriptor for org.jetbrains.kotlin:kotlin-maven-plugin:1.6.21: Plugin org.jetbrains.kotlin:kotlin-maven-plugin:1.6.21 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.jetbrains.kotlin:kotlin-maven-plugin:jar:1.6.21
+Downloading from artifactory: http://lwpeartifabld.tideworks.com:8080/artifactory/repo/org/liquibase/liquibase-maven-plugin/4.5.0/liquibase-maven-plugin-4.5.0.pom
+[WARNING] Failed to retrieve plugin descriptor for org.liquibase:liquibase-maven-plugin:4.5.0: Plugin org.liquibase:liquibase-maven-plugin:4.5.0 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.liquibase:liquibase-maven-plugin:jar:4.5.0
+Downloading from artifactory: http://lwpeartifabld.tideworks.com:8080/artifactory/repo/org/apache/maven/plugins/maven-antrun-plugin/3.0.0/maven-antrun-plugin-3.0.0.pom
+[WARNING] Failed to retrieve plugin descriptor for org.apache.maven.plugins:maven-antrun-plugin:3.0.0: Plugin org.apache.maven.plugins:maven-antrun-plugin:3.0.0 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.apache.maven.plugins:maven-antrun-plugin:jar:3.0.0
+Downloading from artifactory: http://lwpeartifabld.tideworks.com:8080/artifactory/repo/org/apache/maven/plugins/maven-assembly-plugin/3.3.0/maven-assembly-plugin-3.3.0.pom
+[WARNING] Failed to retrieve plugin descriptor for org.apache.maven.plugins:maven-assembly-plugin:3.3.0: Plugin org.apache.maven.plugins:maven-assembly-plugin:3.3.0 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.apache.maven.plugins:maven-assembly-plugin:jar:3.3.0
+[INFO] 
+[INFO] ----------------------< ua.zhytariuk.nure:hotel >-----------------------
+[INFO] Building hotel 1.01-SNAPSHOT-hotel
+[INFO] --------------------------------[ jar ]---------------------------------
+[WARNING] Failed to retrieve plugin descriptor for org.codehaus.mojo:build-helper-maven-plugin:3.2.0: Plugin org.codehaus.mojo:build-helper-maven-plugin:3.2.0 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.codehaus.mojo:build-helper-maven-plugin:jar:3.2.0
+[WARNING] Failed to retrieve plugin descriptor for org.flywaydb:flyway-maven-plugin:8.0.5: Plugin org.flywaydb:flyway-maven-plugin:8.0.5 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.flywaydb:flyway-maven-plugin:jar:8.0.5
+[WARNING] Failed to retrieve plugin descriptor for pl.project13.maven:git-commit-id-plugin:4.9.10: Plugin pl.project13.maven:git-commit-id-plugin:4.9.10 or one of its dependencies could not be resolved: Failed to read artifact descriptor for pl.project13.maven:git-commit-id-plugin:jar:4.9.10
+[WARNING] Failed to retrieve plugin descriptor for org.apache.johnzon:johnzon-maven-plugin:1.2.16: Plugin org.apache.johnzon:johnzon-maven-plugin:1.2.16 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.apache.johnzon:johnzon-maven-plugin:jar:1.2.16
+[WARNING] Failed to retrieve plugin descriptor for org.jooq:jooq-codegen-maven:3.14.15: Plugin org.jooq:jooq-codegen-maven:3.14.15 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.jooq:jooq-codegen-maven:jar:3.14.15
+[WARNING] Failed to retrieve plugin descriptor for org.jetbrains.kotlin:kotlin-maven-plugin:1.6.21: Plugin org.jetbrains.kotlin:kotlin-maven-plugin:1.6.21 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.jetbrains.kotlin:kotlin-maven-plugin:jar:1.6.21
+[WARNING] Failed to retrieve plugin descriptor for org.liquibase:liquibase-maven-plugin:4.5.0: Plugin org.liquibase:liquibase-maven-plugin:4.5.0 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.liquibase:liquibase-maven-plugin:jar:4.5.0
+[WARNING] Failed to retrieve plugin descriptor for org.apache.maven.plugins:maven-antrun-plugin:3.0.0: Plugin org.apache.maven.plugins:maven-antrun-plugin:3.0.0 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.apache.maven.plugins:maven-antrun-plugin:jar:3.0.0
+[WARNING] Failed to retrieve plugin descriptor for org.apache.maven.plugins:maven-assembly-plugin:3.3.0: Plugin org.apache.maven.plugins:maven-assembly-plugin:3.3.0 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.apache.maven.plugins:maven-assembly-plugin:jar:3.3.0
+Downloading from artifactory: http://lwpeartifabld.tideworks.com:8080/artifactory/repo/org/springframework/boot/spring-boot-starter-web/2.6.7/spring-boot-starter-web-2.6.7.pom
+Downloading from artifactory: http://lwpeartifabld.tideworks.com:8080/artifactory/repo/org/springframework/boot/spring-boot-starter-test/2.6.7/spring-boot-starter-test-2.6.7.pom
+Downloading from artifactory: http://lwpeartifabld.tideworks.com:8080/artifactory/repo/org/springframework/boot/spring-boot-starter-thymeleaf/2.6.7/spring-boot-starter-thymeleaf-2.6.7.pom
+Downloading from artifactory: http://lwpeartifabld.tideworks.com:8080/artifactory/repo/bouncycastle/bcprov-jdk15/140/bcprov-jdk15-140.pom
+Downloading from artifactory: http://lwpeartifabld.tideworks.com:8080/artifactory/repo/org/springframework/boot/spring-boot-starter-security/2.6.7/spring-boot-starter-security-2.6.7.pom
+Downloading from artifactory: http://lwpeartifabld.tideworks.com:8080/artifactory/repo/org/postgresql/postgresql/42.3.4/postgresql-42.3.4.pom
+Downloading from artifactory: http://lwpeartifabld.tideworks.com:8080/artifactory/repo/org/projectlombok/lombok/1.18.24/lombok-1.18.24.pom
+Downloading from artifactory: http://lwpeartifabld.tideworks.com:8080/artifactory/repo/org/apache/commons/commons-lang3/3.12.0/commons-lang3-3.12.0.pom
+Downloading from artifactory: http://lwpeartifabld.tideworks.com:8080/artifactory/repo/org/liquibase/liquibase-core/4.9.1/liquibase-core-4.9.1.pom
+Downloading from artifactory: http://lwpeartifabld.tideworks.com:8080/artifactory/repo/org/mapstruct/mapstruct/1.4.2.Final/mapstruct-1.4.2.Final.pom
+Downloading from artifactory: http://lwpeartifabld.tideworks.com:8080/artifactory/repo/com/fasterxml/jackson/core/jackson-databind/2.13.0/jackson-databind-2.13.0.pom
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.630 s
+[INFO] Finished at: 2022-07-20T02:44:50+03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal on project hotel: Could not resolve dependencies for project ua.zhytariuk.nure:hotel:jar:1.01-SNAPSHOT-hotel: Failed to collect dependencies at org.springframework.boot:spring-boot-starter-web:jar:2.6.7: Failed to read artifact descriptor for org.springframework.boot:spring-boot-starter-web:jar:2.6.7: Could not transfer artifact org.springframework.boot:spring-boot-starter-web:pom:2.6.7 from/to artifactory (http://lwpeartifabld.tideworks.com:8080/artifactory/repo): lwpeartifabld.tideworks.com: Unknown host lwpeartifabld.tideworks.com -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/DependencyResolutionException

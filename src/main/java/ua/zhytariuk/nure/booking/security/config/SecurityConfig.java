@@ -28,13 +28,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @SneakyThrows
     @Override
     protected void configure(final HttpSecurity http) {
-        http.authorizeRequests().antMatchers("http://localhost:8081/api/v1/users/**").authenticated()
+        http.authorizeRequests()
             .and()
-            .authorizeRequests().antMatchers("api/v1/roles/**").hasRole("ADMIN_ROLE")
+            .authorizeRequests().antMatchers("/booking/{hotelId}/rooms/{roomId}/reservation/**").authenticated()
             .and()
-            .authorizeRequests().antMatchers("api/v1/reservations/**").authenticated()
+            .authorizeRequests().antMatchers("/booking/users/**").authenticated()
             .and()
             .formLogin()
+            .loginPage("/booking/users/login")
             .permitAll()
             .and()
             .logout();

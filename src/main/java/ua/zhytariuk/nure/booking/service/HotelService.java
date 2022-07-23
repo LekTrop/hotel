@@ -30,8 +30,8 @@ public class HotelService {
     @NonNull
     private final HotelUpdatedValidator hotelUpdatedValidator;
 
-    public List<Hotel> getAll() {
-        return hotelRepository.getAll();
+    public List<Hotel> getAll(final String name) {
+        return hotelRepository.getAll(name);
     }
 
     public Hotel findById(final String id) {

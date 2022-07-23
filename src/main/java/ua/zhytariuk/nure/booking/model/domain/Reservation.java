@@ -59,6 +59,9 @@ public class Reservation {
     @Column(name = "reservation_id")
     private String reservationId;
 
+    @Column(name = "additional_information")
+    private String additionInformation;
+
     @Column(name = "check_in_date")
     private Instant checkInDate;
 
@@ -79,8 +82,10 @@ public class Reservation {
     @ManyToOne
     private User user;
 
-    @JoinColumn(name = "fk_room_id")
     @ManyToOne
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @JoinColumn(name = "fk_room_id")
     private Room room;
 
     @PrePersist

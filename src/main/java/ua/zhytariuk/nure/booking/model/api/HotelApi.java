@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.Value;
 
 /**
  * TODO: Change class description
@@ -29,5 +28,9 @@ public class HotelApi {
     @JsonProperty("rooms")
     @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
     List<RoomApi> rooms = new ArrayList<>();
+
+    @JsonProperty("images")
+    @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
+    List<ImageApi> images = new ArrayList<>();
 
 }

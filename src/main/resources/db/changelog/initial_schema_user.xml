@@ -14,6 +14,10 @@
                 <constraints primaryKey="true" primaryKeyName="user_pk"/>
             </column>
 
+<!--            <column name="age" type="INTEGER">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+
             <column name="password" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>

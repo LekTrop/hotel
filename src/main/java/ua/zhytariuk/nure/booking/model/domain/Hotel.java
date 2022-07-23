@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
@@ -30,7 +31,7 @@ import lombok.ToString;
 @NamedNativeQueries(
         @NamedNativeQuery(
                 name = Hotel.SELECT_HOTELS,
-                query = "SELECT * FROM hotels",
+                query = "SELECT * FROM hotels where :name IS NULL OR lower(name) LIKE lower(:searchKeyword)",
                 resultClass = Hotel.class,
                 hints = @QueryHint(
                         name = org.hibernate.annotations.QueryHints.READ_ONLY,
@@ -69,6 +70,11 @@ public class Hotel {
             orphanRemoval = true,
             cascade = CascadeType.ALL)
     private List<Room> rooms = new ArrayList<>();
+
+    @OneToMany(orphanRemoval = true,
+            cascade = CascadeType.ALL,
+            mappedBy = "hotel")
+    private List<Image> images = new ArrayList<>();
 
     @PrePersist
     private void prePersist() {

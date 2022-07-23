@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Booking</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link type="text/css" rel="stylesheet" th:href="@{css/hotels.css}"/>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<section class="navigation">
+    <div class="nav-container">
+        <nav>
+            <ul class="nav-list">
+                <li>
+                    <a th:href="@{/}">Home</a>
+                </li>
+
+                <li th:if="!${#authorization.expression('isAuthenticated()')}">
+                    <a th:href="@{/login}">Login</a>
+                </li>
+
+                <li th:if="!${#authorization.expression('isAuthenticated()')}">
+                    <a th:href="@{/booking/users/registration}">Registration</a>
+                </li>
+
+                <li th:if="${#authorization.expression('isAuthenticated()')}">
+                    <a th:href="@{/logout}">Logout</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</section>
+<div id="cards">
+    <div class="wrapper" th:each="hotel: ${hotels}">
+        <h1 th:text="${hotel.getName()}"></h1>
+        <div class="image">
+            <a th:href="@{/booking/{hotelId}/rooms(hotelId=${hotel.getId()}, checkIn=${checkIn}, checkOut=${checkOut}, child=${child}, adult=${adult})}">
+                <img class="hotel-image" id="hotel-image" th:src="@{/img/hotel1.jpg}" alt="Hotel Image">
+            </a>
+        </div>
+        <div class="details">
+            <h1><em th:text="${hotel.getAddress()}"></em></h1>
+            <h1><em th:text="${hotel.getTelephone()}"></em></h1>
+        </div>
+    </div>
+</body>
+</html>

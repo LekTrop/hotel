@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking</title>
+
+    <link type="text/css" rel="stylesheet" th:href="@{/css/profile.css}">
+
+</head>
+<body>
+<section class="navigation">
+    <div class="nav-container">
+        <nav>
+            <ul class="nav-list">
+                <li>
+                    <a th:href="@{/}">Home</a>
+                </li>
+
+                <li th:if="!${#authorization.expression('isAuthenticated()')}">
+                    <a th:href="@{/booking/users/login}">Login</a>
+                </li>
+
+                <li th:if="!${#authorization.expression('isAuthenticated()')}">
+                    <a th:href="@{/booking/users/registration}">Registration</a>
+                </li>
+
+                <li th:if="${#authorization.expression('isAuthenticated()')}">
+                    <a th:href="@{/logout}">Logout</a>
+                </li>
+
+                <li th:if="${#authorization.expression('isAuthenticated()')}">
+                    <a th:href="@{/booking/users/profile}">Profile</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</section>
+
+<div class="container">
+
+    <div class="table">
+        <div class="table-header">
+            <div class="header__item"><a id="number" class="filter__link" href="#">№</a></div>
+            <div class="header__item"><a id="check-in" class="filter__link filter__link--number" href="#">Check-in
+                Date</a></div>
+            <div class="header__item"><a id="cost" class="filter__link filter__link--number" href="#">Cost</a></div>
+            <div class="header__item"><a id="check-out" class="filter__link filter__link--number" href="#">Check-out
+                Date</a></div>
+            <div class="header__item"><a id="reservation" class="filter__link filter__link--number" href="#">Reservation
+                Date</a></div>
+            <div class="header__item"><a id="status" class="filter__link filter__link--number" href="#">Status</a></div>
+        </div>
+        <div class="table-content" th:each="reservation : ${user.getReservations()}">
+            <div class="table-row">
+                <div class="table-data" th:text="${reservationStat.count}"></div>
+                <div class="table-data" th:text="${reservation.getCheckInDate()}"></div>
+                <div class="table-data" th:text="${reservation.getPrice()}"></div>
+                <div class="table-data" th:text="${reservation.getCheckOutDate()}"></div>
+                <div class="table-data" th:text="${reservation.getReservationDate()}"></div>
+                <div class="table-data" th:text="${reservation.getStatus().name()}"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

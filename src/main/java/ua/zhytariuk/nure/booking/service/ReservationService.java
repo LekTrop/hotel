@@ -54,11 +54,14 @@ public class ReservationService {
     }
 
     public Reservation save(final Reservation reservation,
-                            final String hotelId,
-                            final String roomId) {
+                            final String roomId,
+                            final String hotelId) {
 
         final User user = userService.findByUsername(authenticationFacade.getAuthentication().getName());
         final Room room = roomService.findById(roomId, hotelId);
+
+        reservation.setStatus(ReservationStatus.IN_PROGRESS);
+        reservation.setPrice(reservationUtility.calculateTotalPrice(reservation, room));
 
         reservationCreatedValidator.user(user)
                                    .room(room)
@@ -67,8 +70,6 @@ public class ReservationService {
 
         reservation.setRoom(room);
         reservation.setUser(user);
-        reservation.setStatus(ReservationStatus.IN_PROGRESS);
-        reservation.setPrice(reservationUtility.calculateTotalPrice(reservation));
 
         final Reservation createdReservation = reservationRepository.save(reservation);
 

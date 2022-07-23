@@ -5,7 +5,6 @@ import java.util.Optional;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
-import ua.zhytariuk.nure.booking.model.api.HotelApi;
 import ua.zhytariuk.nure.booking.model.api.RoomApi;
 import ua.zhytariuk.nure.booking.model.domain.Hotel;
 import ua.zhytariuk.nure.booking.model.domain.Room;
@@ -18,7 +17,8 @@ import ua.zhytariuk.nure.booking.model.domain.Room;
  */
 @Mapper(uses = {
         DiscountMapper.class,
-        ReservationMapper.class},
+        ReservationMapper.class,
+        ImageMapper.class   },
         config = MapperConfiguration.class)
 public interface RoomMapper {
 

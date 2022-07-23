@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.persistence.EntityManagerFactory;
 
+import org.hibernate.jpa.TypedParameterValue;
+import org.hibernate.type.BigDecimalType;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ua.zhytariuk.nure.booking.model.domain.Room;
@@ -30,12 +32,18 @@ public class RoomRepository extends AbstractCrudRepository<Room, String> {
                                   final Instant checkIn,
                                   final Instant checkOut,
                                   final BigDecimal minPrice,
-                                  final BigDecimal maxPrice) {
+                                  final BigDecimal maxPrice,
+                                  final Integer adult,
+                                  final Integer child) {
 
         return getEntityManager().createNamedQuery(SELECT_ROOMS_BY_FILTER, Room.class)
                                  .setParameter("hotelId", hotelId)
                                  .setParameter("checkIn", checkIn)
                                  .setParameter("checkOut", checkOut)
+                                 .setParameter("adult", adult)
+                                 .setParameter("child", child)
+                                 .setParameter("minPrice", new TypedParameterValue(BigDecimalType.INSTANCE, minPrice))
+                                 .setParameter("maxPrice", new TypedParameterValue(BigDecimalType.INSTANCE, maxPrice))
                                  .getResultList();
     }
 }

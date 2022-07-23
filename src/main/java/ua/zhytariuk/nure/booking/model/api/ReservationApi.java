@@ -3,9 +3,13 @@ package ua.zhytariuk.nure.booking.model.api;
 import java.math.BigDecimal;
 import java.time.Instant;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Value;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.FieldDefaults;
 import ua.zhytariuk.nure.booking.model.api.authentication.UserApi;
 import ua.zhytariuk.nure.booking.model.domain.enums.ReservationStatus;
 
@@ -15,16 +19,21 @@ import ua.zhytariuk.nure.booking.model.domain.enums.ReservationStatus;
  * @author oleksandr.zhytariuk (ozhytari)
  * @since 0.1
  */
-@Value
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class ReservationApi {
 
     String reservationId;
+    String additionInformation;
     Instant checkInDate;
     Instant checkOutDate;
     Instant reservationDate;
     BigDecimal price;
     ReservationStatus status;
-    UserApi user;
+    String username;
     RoomApi room;
 }

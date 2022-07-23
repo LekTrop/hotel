@@ -1,20 +1,16 @@
 package ua.zhytariuk.nure.booking.endpoint;
 
-import static ua.zhytariuk.nure.booking.exception.register.ErrorRegister.ENTITY_NOT_FOUND_EXCEPTION;
-
-import java.util.Optional;
-
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import ua.zhytariuk.nure.booking.exception.BookingNotFoundException;
+import org.springframework.web.bind.annotation.RequestParam;
+import ua.zhytariuk.nure.booking.common.utility.TimeUtility;
 import ua.zhytariuk.nure.booking.model.api.ReservationApi;
 import ua.zhytariuk.nure.booking.model.domain.Reservation;
 import ua.zhytariuk.nure.booking.model.mapper.ReservationMapper;
@@ -26,8 +22,8 @@ import ua.zhytariuk.nure.booking.service.ReservationService;
  * @author oleksandr.zhytariuk (ozhytari)
  * @since 0.1
  */
-@RestController
-@RequestMapping("api/v1/hotels/{hotelId}/rooms/{roomId}/reservations")
+@Controller
+@RequestMapping("booking/{hotelId}/rooms/{roomId}/reservation")
 @RequiredArgsConstructor
 public class ReservationEndpoint {
 
@@ -35,33 +31,57 @@ public class ReservationEndpoint {
     private final ReservationService reservationService;
     @NonNull
     private final ReservationMapper reservationMapper;
+    @NonNull
+    private final TimeUtility timeUtility;
 
-    @GetMapping("/{reservationId}")
-    public ReservationApi findById(final @PathVariable("reservationId") String reservationId,
-                                   final @PathVariable("roomId") String roomId,
-                                   final @PathVariable("hotelId") String hotelId) {
-        return Optional.ofNullable(reservationService.findById(reservationId))
-                       .map(reservationMapper::toApi)
-                       .orElseThrow(() -> new BookingNotFoundException(ENTITY_NOT_FOUND_EXCEPTION, reservationId));
+//    @GetMapping("/{reservationId}")
+//    public ReservationApi findById(final @PathVariable("reservationId") String reservationId,
+//                                   final @PathVariable("roomId") String roomId,
+//                                   final @PathVariable("hotelId") String hotelId) {
+//        return Optional.ofNullable(reservationService.findById(reservationId))
+//                       .map(reservationMapper::toApi)
+//                       .orElseThrow(() -> new BookingNotFoundException(ENTITY_NOT_FOUND_EXCEPTION, reservationId));
+//    }
+
+    @GetMapping
+    public String reservationForm(final Model model,
+                                  final @PathVariable("roomId") String roomId,
+                                  final @PathVariable("hotelId") String hotelId,
+                                  final @RequestParam(name = "child") String child,
+                                  final @RequestParam(name = "adult") String adult,
+                                  final @RequestParam(name = "checkIn") String checkIn,
+                                  final @RequestParam(name = "checkOut") String checkOut) {
+
+        model.addAttribute("roomId", roomId);
+        model.addAttribute("hotelId", hotelId);
+        model.addAttribute("adult", adult);
+        model.addAttribute("child", child);
+        model.addAttribute("checkIn", timeUtility.convertStringToTime(checkIn));
+        model.addAttribute("checkOut", timeUtility.convertStringToTime(checkOut));
+        model.addAttribute("reservationForm", new ReservationApi());
+
+        return "reservation";
     }
 
     @PostMapping
-    public ReservationApi save(final @RequestBody ReservationApi reservationApi,
-                               final @PathVariable("roomId") String roomId,
-                               final @PathVariable("hotelId") String hotelId) {
+    public String doReservation(final @ModelAttribute("reservationForm") ReservationApi reservationApi,
+                       final @PathVariable("roomId") String roomId,
+                       final @PathVariable("hotelId") String hotelId) {
         final Reservation reservation = reservationMapper.toDomain(reservationApi);
-        return reservationMapper.toApi(reservationService.save(reservation, roomId, hotelId));
-    }
+        final var createdReservation = reservationMapper.toApi(reservationService.save(reservation, roomId, hotelId));
 
-    @DeleteMapping("/{reservationId}")
-    public ReservationApi deleteById(final @PathVariable("reservationId") String reservationId) {
-        return reservationMapper.toApi(reservationService.deleteById(reservationId));
+        return "redirect:/";
     }
-
-    @PutMapping("/{reservationId}")
-    public ReservationApi update(final @PathVariable("reservationId") String reservationId,
-                                 final @RequestBody ReservationApi reservationApi) {
-        final Reservation reservation = reservationMapper.toDomain(reservationApi);
-        return reservationMapper.toApi(reservationService.update(reservation, reservationId));
-    }
+//
+//    @DeleteMapping("/{reservationId}")
+//    public ReservationApi deleteById(final @PathVariable("reservationId") String reservationId) {
+//        return reservationMapper.toApi(reservationService.deleteById(reservationId));
+//    }
+//
+//    @PutMapping("/{reservationId}")
+//    public ReservationApi update(final @PathVariable("reservationId") String reservationId,
+//                                 final @RequestBody ReservationApi reservationApi) {
+//        final Reservation reservation = reservationMapper.toDomain(reservationApi);
+//        return reservationMapper.toApi(reservationService.update(reservation, reservationId));
+//    }
 }

@@ -19,7 +19,8 @@ public enum ErrorRegister implements BookingError {
     ROOM_CANNOT_BE_NULL("Room cannot be null", 15),
     INVALID_RESERVATION_DATE("Invalid reservation date", 16),
     ROOM_IS_RESERVED_FOR_DATE_RANGE("Cannot create reservation, because room is reserved for date range %s - %s", 17),
-    HOTEL_CANNOT_BE_NULL("Hotel cannot be null", 18);
+    HOTEL_CANNOT_BE_NULL("Hotel cannot be null", 18),
+    AGE_IS_LESS_THAT_MINIMUM("Age: [%d] is less then minimum: [%d]", 19);
 
     private String message;
     private int errorCode;
